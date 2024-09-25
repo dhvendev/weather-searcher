@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Погода</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="header">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert">
+                        <span>{{ message }}</span>
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/" method="post">
+            <input type="text" name="city" placeholder="Enter city✌️">
+            <input type="submit" value="">
+        </form>
+    </div>
+    <div class="main {{ style }}" style="background-image: url('../static/{{ png }}');">
+        <div class="content">
+            <span>{{ temp_day }}°</span>
+            <span>{{ city}}</span>
+        </div>
+        <div class="footer">
+            {% if week_weather %}
+                {% for weather in week_weather %}
+                    <div class="day--week">
+                        <span>{{ weather[0] }}</span>
+                        <div class="temp-png">
+                            <span>{{ weather[1]['max'] }}°</span>
+                            <span>{{ weather[1]['weather'] }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="about">
+        <span>2023. Developed by <a href="https://github.com/dhvendev">dhvendev®</a></span>
+        <span>The design is inspired by <a href="https://dribbble.com/shots/2332668-Lonely-Mountain-Weather-Concept">Marina Matijaca™ ®</a></span>
+        <span>Weather data is provided by <a href="https://openweathermap.org/">OpenWeatherMap</a></span>
+    </div>
+</body>
+</html>
